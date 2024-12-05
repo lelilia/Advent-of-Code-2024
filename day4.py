@@ -4,14 +4,14 @@ import numpy as np
 def part1(puzzle, i, j):
     found = 0
     for di, dj in [
-        [0, 1],     # down
-        [0, -1],    # up
-        [1, 0],     # right
-        [-1, 0],    # left
-        [1, 1],     # left top to right buttom
-        [1, -1],    # right top to left buttom
-        [-1, 1],    # left buttom to right top
-        [-1, -1],   # right buttom to left top
+        [0, 1],  # down
+        [0, -1],  # up
+        [1, 0],  # right
+        [-1, 0],  # left
+        [1, 1],  # left top to right buttom
+        [1, -1],  # right top to left buttom
+        [-1, 1],  # left buttom to right top
+        [-1, -1],  # right buttom to left top
     ]:
         if (
             puzzle[i, j]

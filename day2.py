@@ -1,57 +1,77 @@
 with open("input2", "r") as f:
     reports = f.readlines()
 
+
 def check_report(report):
     if type(report) == str:
         report = [int(x) for x in report.split()]
     if report[0] > report[1]:
-        for i in range(len(report)-1):
-            if not 1 <= report[i] - report[i+1] <= 3:
+        for i in range(len(report) - 1):
+            if not 1 <= report[i] - report[i + 1] <= 3:
                 return 0
         return 1
     if report[0] < report[1]:
-        for i in range(len(report)-1):
-            if not 1 <= report[i+1] - report[i] <= 3:
+        for i in range(len(report) - 1):
+            if not 1 <= report[i + 1] - report[i] <= 3:
                 return 0
         return 1
     return 0
+
 
 def check_report_dampener(report):
     report = [int(x) for x in report.split()]
     if check_report(report) == 1:
         return 1
     for i in range(len(report)):
-        if check_report(report[:i] + report[i+1:]) == 1:
+        if check_report(report[:i] + report[i + 1 :]) == 1:
             return 1
     return 0
+
 
 def check_report_dampener1(report, flag=True):
     report = [int(x) for x in report.split()]
 
     if report[0] > report[1]:
-        for i in range(len(report)-1):
-            if not 1 <= report[i] - report[i+1] <= 3:
+        for i in range(len(report) - 1):
+            if not 1 <= report[i] - report[i + 1] <= 3:
                 if flag:
-                    list_1 = " ".join([str(x) for x in report[:i+1] + report[i+2:]])
-                    list_2 = " ".join([str(x) for x in report[:i] + report[i+1:]])
-                    return 1 if check_report_dampener(list_1, False) + check_report_dampener(list_2, False) >= 1 else 0
+                    list_1 = " ".join(
+                        [str(x) for x in report[: i + 1] + report[i + 2 :]]
+                    )
+                    list_2 = " ".join([str(x) for x in report[:i] + report[i + 1 :]])
+                    return (
+                        1
+                        if check_report_dampener(list_1, False)
+                        + check_report_dampener(list_2, False)
+                        >= 1
+                        else 0
+                    )
                 else:
                     return 0
         return 1
     if report[0] < report[1]:
-        for i in range(len(report)-1):
+        for i in range(len(report) - 1):
 
-            if not 1 <= report[i+1] - report[i] <= 3:
+            if not 1 <= report[i + 1] - report[i] <= 3:
                 if flag:
 
-                    list_1 = " ".join([str(x) for x in report[:i+1] + report[i+2:]])
-                    list_2 = " ".join([str(x) for x in report[:i] + report[i+1:]])
+                    list_1 = " ".join(
+                        [str(x) for x in report[: i + 1] + report[i + 2 :]]
+                    )
+                    list_2 = " ".join([str(x) for x in report[:i] + report[i + 1 :]])
 
-                    return 1 if check_report_dampener(list_1, False) + check_report_dampener(list_2, False) >= 1 else 0
+                    return (
+                        1
+                        if check_report_dampener(list_1, False)
+                        + check_report_dampener(list_2, False)
+                        >= 1
+                        else 0
+                    )
                 else:
                     return 0
         return 1
     return 0
+
 
 save = 0
 save_with_tolerance = 0
